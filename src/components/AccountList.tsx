@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { PlusCircle, CreditCard, QrCode, Scan } from 'lucide-react';
-import { QRCodeSVG } from 'qrcode.react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { Account } from '../types';
 import { addAccount, getAccounts } from '../utils/storage';
@@ -13,7 +12,6 @@ interface Props {
 export default function AccountList({ onSelectAccount }: Props) {
   const [accounts, setAccounts] = useState<Account[]>(getAccounts());
   const [showNewAccount, setShowNewAccount] = useState(false);
-  const [showQRCode, setShowQRCode] = useState<string | null>(null);
   const [showScanner, setShowScanner] = useState(false);
   const [newAccountData, setNewAccountData] = useState({ name: '', pin: '' });
 
@@ -84,14 +82,8 @@ export default function AccountList({ onSelectAccount }: Props) {
           >
             <div className="flex justify-between items-start mb-3">
               <CreditCard className="w-8 h-8 text-blue-400" />
-              <button
-                onClick={() => setShowQRCode(account.id)}
-                className="text-slate-400 hover:text-blue-400 transition-colors"
-              >
-                <QrCode className="w-6 h-6" />
-              </button>
+              <h2 className="text-xl font-semibold text-white mb-2">{account.name}</h2>
             </div>
-            <h2 className="text-xl font-semibold text-white mb-2">{account.name}</h2>
             <button
               onClick={() => onSelectAccount(account)}
               className="w-full mt-2 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-400 transition-colors"
@@ -151,28 +143,6 @@ export default function AccountList({ onSelectAccount }: Props) {
                 Cancel
               </button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {showQRCode && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700">
-            <h2 className="text-2xl font-bold text-white mb-4">Account QR Code</h2>
-            <div className="bg-white p-4 rounded-lg mb-4">
-              <QRCodeSVG
-                value={showQRCode}
-                size={200}
-                level="H"
-                includeMargin
-              />
-            </div>
-            <button
-              onClick={() => setShowQRCode(null)}
-              className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
