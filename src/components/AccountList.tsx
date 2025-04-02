@@ -4,7 +4,8 @@ import { QRCodeSVG } from 'qrcode.react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { Account } from '../types';
 import { addAccount, getAccounts } from '../utils/storage';
-
+import { NotificationContainer } from './ui/Notification';
+import { addNotification, Notification } from '../utils/notifications';
 interface Props {
   onSelectAccount: (account: Account) => void;
 }
@@ -121,12 +122,16 @@ export default function AccountList({ onSelectAccount }: Props) {
               className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 mb-4 text-white"
               value={newAccountData.pin}
               onChange={(e) => {
-              const pin = e.target.value;
+              var pin = e.target.value;
               if (/^\d{0,4}$/.test(pin)) {
                 setNewAccountData({ ...newAccountData, pin });
+              } else {
+                console.log('PIN must be a 4-digit number');
+                addNotification('PIN must be a 4-digit number', 'error');
               }
               }}
             />
+            <NotificationContainer />
             <div className="flex gap-3">
               <button
                 onClick={handleCreateAccount}
