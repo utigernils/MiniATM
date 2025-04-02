@@ -69,21 +69,21 @@ export default function Dashboard({ account, onLogout }: Props) {
         <div>
           <button
             onClick={() => setShowQRCode(account.id)}
-            className="text-slate-400 hover:text-blue-400 transition-colors mx-3"
+            className="text-stone-400 hover:text-emerald-400 transition-colors mx-3"
           >
             <QrCode className="w-6 h-6" />
           </button>
           <button
             onClick={onLogout}
-            className="text-slate-400 hover:text-white"
+            className="text-stone-400 hover:text-white"
           >
             <ArrowLeftCircle className="w-6 h-6" />
           </button>
         </div>
       </div>
 
-      <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-xl p-8 mb-8">
-        <p className="text-slate-400 mb-2">Current Balance</p>
+      <div className="bg-stone-800/50 backdrop-blur-lg border border-stone-700 rounded-xl p-8 mb-8">
+        <p className="text-stone-400 mb-2">Current Balance</p>
         <h2 className="text-5xl font-bold text-white">
           CHF {account.balance.toFixed(2)}
         </h2>
@@ -95,7 +95,7 @@ export default function Dashboard({ account, onLogout }: Props) {
             setTransactionType("deposit");
             setShowModal(true);
           }}
-          className="p-4 bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-xl hover:bg-slate-700/50 transition-all flex items-center justify-center gap-2"
+          className="p-4 bg-stone-800/50 backdrop-blur-lg border border-stone-700 rounded-xl hover:bg-stone-700/50 transition-all flex items-center justify-center gap-2"
         >
           <ArrowUpCircle className="w-5 h-5 text-green-400" />
           <span className="text-white">Deposit</span>
@@ -105,14 +105,14 @@ export default function Dashboard({ account, onLogout }: Props) {
             setTransactionType("withdrawal");
             setShowModal(true);
           }}
-          className="p-4 bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-xl hover:bg-slate-700/50 transition-all flex items-center justify-center gap-2"
+          className="p-4 bg-stone-800/50 backdrop-blur-lg border border-stone-700 rounded-xl hover:bg-stone-700/50 transition-all flex items-center justify-center gap-2"
         >
           <ArrowDownCircle className="w-5 h-5 text-red-400" />
           <span className="text-white">Withdraw</span>
         </button>
       </div>
 
-      <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-xl p-6">
+      <div className="bg-stone-800/50 backdrop-blur-lg border border-stone-700 rounded-xl p-6">
         <h3 className="text-xl font-bold text-white mb-4">
           Recent Transactions
         </h3>
@@ -120,7 +120,7 @@ export default function Dashboard({ account, onLogout }: Props) {
           {account.transactions.map((transaction) => (
             <div
               key={transaction.id}
-              className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg"
+              className="flex items-center justify-between p-3 bg-stone-700/30 rounded-lg"
             >
               <div className="flex items-center gap-3">
                 {transaction.type === "deposit" ? (
@@ -132,7 +132,7 @@ export default function Dashboard({ account, onLogout }: Props) {
                   <p className="text-white font-medium">
                     {transaction.type === "deposit" ? "Deposit" : "Withdrawal"}
                   </p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-sm text-stone-400">
                     {new Date(transaction.date).toLocaleDateString()}
                   </p>
                 </div>
@@ -150,7 +150,7 @@ export default function Dashboard({ account, onLogout }: Props) {
             </div>
           ))}
           {account.transactions.length === 0 && (
-            <p className="text-slate-400 text-center py-4">
+            <p className="text-stone-400 text-center py-4">
               No transactions yet
             </p>
           )}
@@ -159,14 +159,14 @@ export default function Dashboard({ account, onLogout }: Props) {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700 w-full max-w-md">
+          <div className="bg-stone-800/90 p-6 rounded-xl border border-stone-700 w-full max-w-md">
             <h2 className="text-2xl font-bold text-white mb-4">
               {transactionType === "deposit" ? "Deposit" : "Withdraw"} Money
             </h2>
             <input
               type="number"
               placeholder="Enter amount"
-              className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 mb-4 text-white"
+              className="w-full bg-stone-900/50 border border-stone-700 rounded-lg p-3 mb-4 text-white"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
@@ -179,7 +179,7 @@ export default function Dashboard({ account, onLogout }: Props) {
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
+                className="flex-1 bg-stone-700 hover:bg-stone-600 text-white rounded-lg p-3 transition-colors"
               >
                 Cancel
               </button>
@@ -189,7 +189,7 @@ export default function Dashboard({ account, onLogout }: Props) {
       )}
       {showQRCode && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700">
+          <div className="bg-stone-800/90 p-6 rounded-xl border border-stone-700">
             <h2 className="text-2xl font-bold text-white mb-4">
               Account QR Code
             </h2>
@@ -203,7 +203,7 @@ export default function Dashboard({ account, onLogout }: Props) {
             </div>
             <button
               onClick={() => setShowQRCode(null)}
-              className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
+              className="w-full bg-stone-700 hover:bg-stone-600 text-white rounded-lg p-3 transition-colors"
             >
               Close
             </button>

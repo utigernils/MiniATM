@@ -69,10 +69,10 @@ export default function AccountList({ onSelectAccount }: Props) {
     <div className="p-8 max-w-4xl mx-auto">
      <NotificationContainer />
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-blue-400">MiniAtm</h1>
+        <h1 className="text-4xl font-bold text-emerald-400">MiniAtm</h1>
         <button
           onClick={() => setShowScanner(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors"
         >
           <Scan className="w-5 h-5" />
           <span>Scan QR Code</span>
@@ -83,15 +83,15 @@ export default function AccountList({ onSelectAccount }: Props) {
         {accounts.map((account) => (
           <div
             key={account.id}
-            className="p-6 rounded-xl bg-slate-800/50 backdrop-blur-lg border border-slate-700/50 hover:bg-slate-700/50 transition-all"
+            className="p-6 rounded-xl bg-stone-800/50 backdrop-blur-lg border border-stone-700/50 hover:bg-stone-700/50 transition-all"
           >
             <div className="flex justify-between items-start mb-3">
-              <CreditCard className="w-8 h-8 text-blue-400" />
+              <CreditCard className="w-8 h-8 text-emerald-400" />
               <h2 className="text-xl font-semibold text-white mb-2">{account.name}</h2>
             </div>
             <button
               onClick={() => onSelectAccount(account)}
-              className="w-full mt-2 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-400 transition-colors"
+              className="w-full mt-2 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 rounded-lg text-emerald-400 transition-colors"
             >
               Access Account
             </button>
@@ -100,7 +100,7 @@ export default function AccountList({ onSelectAccount }: Props) {
         
         <button
           onClick={() => setShowNewAccount(true)}
-          className="p-6 rounded-xl border-2 border-dashed border-slate-700 hover:border-blue-400 transition-all flex flex-col items-center justify-center text-slate-400 hover:text-blue-400"
+          className="p-6 rounded-xl border-2 border-dashed border-stone-700 hover:border-emerald-400 transition-all flex flex-col items-center justify-center text-stone-400 hover:text-emerald-400"
         >
           <PlusCircle className="w-8 h-8 mb-2" />
           <span>Create New Account</span>
@@ -109,19 +109,19 @@ export default function AccountList({ onSelectAccount }: Props) {
 
       {showNewAccount && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700 w-full max-w-md">
+          <div className="bg-stone-800/90 p-6 rounded-xl border border-stone-700 w-full max-w-md">
             <h2 className="text-2xl font-bold text-white mb-4">Create New Account</h2>
             <input
               type="text"
               placeholder="Account Name"
-              className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 mb-3 text-white"
+              className="w-full bg-stone-900/50 border border-stone-700 rounded-lg p-3 mb-3 text-white"
               value={newAccountData.name}
               onChange={(e) => setNewAccountData({ ...newAccountData, name: e.target.value })}
             />
             <input
               type="password"
               placeholder="PIN"
-              className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 mb-4 text-white"
+              className="w-full bg-stone-900/50 border border-stone-700 rounded-lg p-3 mb-4 text-white"
               value={newAccountData.pin}
               onChange={(e) => {
               var pin = e.target.value;
@@ -137,13 +137,13 @@ export default function AccountList({ onSelectAccount }: Props) {
             <div className="flex gap-3">
               <button
                 onClick={handleCreateAccount}
-                className="flex-1 bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-3 transition-colors"
+                className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg p-3 transition-colors"
               >
                 Create Account
               </button>
               <button
                 onClick={() => setShowNewAccount(false)}
-                className="flex-1 bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
+                className="flex-1 bg-stone-700 hover:bg-stone-600 text-white rounded-lg p-3 transition-colors"
               >
                 Cancel
               </button>
@@ -154,12 +154,12 @@ export default function AccountList({ onSelectAccount }: Props) {
 
       {showScanner && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700 w-full max-w-md">
+          <div className="bg-stone-800/90 p-6 rounded-xl border border-stone-700 w-full max-w-md">
             <h2 className="text-2xl font-bold text-white mb-4">Scan Account QR Code</h2>
             <div id="qr-reader" className="overflow-hidden rounded-lg mb-4" />
             <button
               onClick={() => setShowScanner(false)}
-              className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
+              className="w-full bg-stone-700 hover:bg-stone-600 text-white rounded-lg p-3 transition-colors"
             >
               Cancel
             </button>

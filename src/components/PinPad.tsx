@@ -56,18 +56,18 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
       <NotificationContainer />
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-bold text-white">Enter PIN for {account.name}</h2>
-        <button onClick={onBack} className="text-slate-400 hover:text-white">
+        <button onClick={onBack} className="text-stone-400 hover:text-white">
           <X className="w-6 h-6" />
         </button>
       </div>
 
-      <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-xl p-6 mb-6">
+      <div className="bg-stone-800/50 backdrop-blur-lg border border-stone-700 rounded-xl p-6 mb-6">
         <div className="flex justify-center mb-6">
           {[1,2,3,4].map((_, i) => (
             <div
               key={i}
               className={`w-4 h-4 mx-2 rounded-full ${
-                pin.length > i ? 'bg-blue-400' : 'bg-slate-700'
+                pin.length > i ? 'bg-emerald-400' : 'bg-stone-700'
               }`}
             />
           ))}
@@ -78,26 +78,26 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
             <button
               key={number}
               onClick={() => handleNumberClick(number)}
-              className="bg-slate-700/50 hover:bg-slate-600/50 text-white text-2xl font-bold rounded-lg p-4 transition-colors"
+              className="bg-stone-700/50 hover:bg-stone-600/50 text-white text-2xl font-bold rounded-lg p-4 transition-colors"
             >
               {number}
             </button>
           ))}
           <button
             onClick={handleDelete}
-            className="bg-slate-700/50 hover:bg-slate-600/50 text-white rounded-lg p-4 transition-colors flex items-center justify-center"
+            className="bg-stone-700/50 hover:bg-stone-600/50 text-white rounded-lg p-4 transition-colors flex items-center justify-center"
           >
             <Delete className="w-6 h-6" />
           </button>
           <button
             onClick={() => handleNumberClick(0)}
-            className="bg-slate-700/50 hover:bg-slate-600/50 text-white text-2xl font-bold rounded-lg p-4 transition-colors"
+            className="bg-stone-700/50 hover:bg-stone-600/50 text-white text-2xl font-bold rounded-lg p-4 transition-colors"
           >
             0
           </button>
             <button
             onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 transition-colors flex items-center justify-center"
+            className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg p-4 transition-colors flex items-center justify-center"
             >
             <Check className="w-6 h-6" />
             </button>
