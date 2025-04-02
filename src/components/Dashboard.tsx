@@ -8,6 +8,8 @@ import {
 import { Account, Transaction } from "../types";
 import { updateAccount } from "../utils/storage";
 import { QRCodeSVG } from "qrcode.react";
+import { NotificationContainer } from "./ui/Notification";
+import { addNotification } from "../utils/notifications";
 
 interface Props {
   account: Account;
@@ -25,12 +27,12 @@ export default function Dashboard({ account, onLogout }: Props) {
   const handleTransaction = () => {
     const numAmount = parseFloat(amount);
     if (isNaN(numAmount) || numAmount <= 0) {
-      alert("Please enter a valid amount");
+      addNotification("Invalid amount", "error");
       return;
     }
 
     if (transactionType === "withdrawal" && numAmount > account.balance) {
-      alert("Insufficient funds");
+      addNotification("Insufficient balance", "error");
       return;
     }
 
@@ -59,6 +61,7 @@ export default function Dashboard({ account, onLogout }: Props) {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
+      <NotificationContainer />
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-4xl font-bold text-white">
           {account.name}'s Account

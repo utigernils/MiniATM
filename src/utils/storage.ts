@@ -1,4 +1,5 @@
 import { Account } from '../types';
+import { addNotification } from './notifications';
 
 export const getAccounts = (): Account[] => {
   const accounts = localStorage.getItem('accounts');
@@ -21,5 +22,6 @@ export const updateAccount = (account: Account) => {
   if (index !== -1) {
     accounts[index] = account;
     saveAccounts(accounts);
+    addNotification('Transaction successfull', 'success');
   }
 };

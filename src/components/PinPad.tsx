@@ -25,6 +25,7 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
 
   const handleSubmit = () => {
     if (pin === account.pin) {
+      addNotification('Successfully logged in', 'success');
       onSuccess();
     } else {
       setPin('');
