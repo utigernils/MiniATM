@@ -120,7 +120,12 @@ export default function AccountList({ onSelectAccount }: Props) {
               placeholder="PIN"
               className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 mb-4 text-white"
               value={newAccountData.pin}
-              onChange={(e) => setNewAccountData({ ...newAccountData, pin: e.target.value })}
+              onChange={(e) => {
+              const pin = e.target.value;
+              if (/^\d{0,4}$/.test(pin)) {
+                setNewAccountData({ ...newAccountData, pin });
+              }
+              }}
             />
             <div className="flex gap-3">
               <button
