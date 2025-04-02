@@ -5,9 +5,6 @@
 ![Bildschirmfoto vom 2025-04-02 13-02-30](https://github.com/user-attachments/assets/9cad1333-a8e4-48f2-bd1b-1691a8a1ee75)
 
 
-![Bildschirmfoto vom 2025-04-02 13-02-30](https://github.com/user-attachments/assets/61ad74c6-e2d0-4fe9-b28d-5da4aeba34e9)
-
-
 ![Bildschirmfoto vom 2025-04-02 13-02-56](https://github.com/user-attachments/assets/8dc3e2a2-3c9f-4fe2-a2ce-f525750020e1)
 
 
