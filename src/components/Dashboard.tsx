@@ -82,7 +82,7 @@ export default function Dashboard({ account, onLogout }: Props) {
       <div className="bg-slate-800/50 backdrop-blur-lg border border-slate-700 rounded-xl p-8 mb-8">
         <p className="text-slate-400 mb-2">Current Balance</p>
         <h2 className="text-5xl font-bold text-white">
-          €{account.balance.toFixed(2)}
+          CHF {account.balance.toFixed(2)}
         </h2>
       </div>
 
@@ -141,7 +141,7 @@ export default function Dashboard({ account, onLogout }: Props) {
                     : "text-red-400"
                 }`}
               >
-                {transaction.type === "deposit" ? "+" : "-"}€
+                {transaction.type === "deposit" ? "+" : "-"}CHF
                 {transaction.amount.toFixed(2)}
               </p>
             </div>

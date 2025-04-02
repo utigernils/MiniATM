@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Delete, Check } from 'lucide-react';
 import { Account } from '../types';
 import { NotificationContainer } from './ui/Notification';
 import { addNotification, Notification } from '../utils/notifications';
@@ -84,9 +84,9 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
           ))}
           <button
             onClick={handleDelete}
-            className="bg-slate-700/50 hover:bg-slate-600/50 text-white rounded-lg p-4 transition-colors"
+            className="bg-slate-700/50 hover:bg-slate-600/50 text-white rounded-lg p-4 transition-colors flex items-center justify-center"
           >
-            ←
+            <Delete className="w-6 h-6" />
           </button>
           <button
             onClick={() => handleNumberClick(0)}
@@ -94,12 +94,12 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
           >
             0
           </button>
-          <button
+            <button
             onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 transition-colors"
-          >
-            →
-          </button>
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 transition-colors flex items-center justify-center"
+            >
+            <Check className="w-6 h-6" />
+            </button>
         </div>
       </div>
     </div>
