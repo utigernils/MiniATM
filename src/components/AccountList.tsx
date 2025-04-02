@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { PlusCircle, CreditCard } from 'lucide-react';
+import { PlusCircle, CreditCard, QrCode, Scan } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
+import { Html5QrcodeScanner } from 'html5-qrcode';
 import { Account } from '../types';
 import { addAccount, getAccounts } from '../utils/storage';
 
@@ -10,6 +12,8 @@ interface Props {
 export default function AccountList({ onSelectAccount }: Props) {
   const [accounts, setAccounts] = useState<Account[]>(getAccounts());
   const [showNewAccount, setShowNewAccount] = useState(false);
+  const [showQRCode, setShowQRCode] = useState<string | null>(null);
+  const [showScanner, setShowScanner] = useState(false);
   const [newAccountData, setNewAccountData] = useState({ name: '', pin: '' });
 
   const handleCreateAccount = () => {
@@ -26,21 +30,69 @@ export default function AccountList({ onSelectAccount }: Props) {
     setNewAccountData({ name: '', pin: '' });
   };
 
+  React.useEffect(() => {
+    let scanner: Html5QrcodeScanner | null = null;
+    
+    if (showScanner) {
+      scanner = new Html5QrcodeScanner(
+        "qr-reader",
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        false
+      );
+      
+      scanner.render((decodedText) => {
+        const account = accounts.find(acc => acc.id === decodedText);
+        if (account) {
+          setShowScanner(false);
+          scanner?.clear();
+          onSelectAccount(account);
+        }
+      }, () => {});
+    }
+
+    return () => {
+      if (scanner) {
+        scanner.clear();
+      }
+    };
+  }, [showScanner, accounts, onSelectAccount]);
+
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold text-blue-400 mb-8">ATM Dashboard</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-blue-400">ATM Dashboard</h1>
+        <button
+          onClick={() => setShowScanner(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors"
+        >
+          <Scan className="w-5 h-5" />
+          <span>Scan QR Code</span>
+        </button>
+      </div>
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {accounts.map((account) => (
-          <button
+          <div
             key={account.id}
-            onClick={() => onSelectAccount(account)}
             className="p-6 rounded-xl bg-slate-800/50 backdrop-blur-lg border border-slate-700/50 hover:bg-slate-700/50 transition-all"
           >
-            <CreditCard className="w-8 h-8 text-blue-400 mb-3" />
+            <div className="flex justify-between items-start mb-3">
+              <CreditCard className="w-8 h-8 text-blue-400" />
+              <button
+                onClick={() => setShowQRCode(account.id)}
+                className="text-slate-400 hover:text-blue-400 transition-colors"
+              >
+                <QrCode className="w-6 h-6" />
+              </button>
+            </div>
             <h2 className="text-xl font-semibold text-white mb-2">{account.name}</h2>
-            <p className="text-slate-400">Click to access</p>
-          </button>
+            <button
+              onClick={() => onSelectAccount(account)}
+              className="w-full mt-2 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-400 transition-colors"
+            >
+              Access Account
+            </button>
+          </div>
         ))}
         
         <button
@@ -84,6 +136,43 @@ export default function AccountList({ onSelectAccount }: Props) {
                 Cancel
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showQRCode && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700">
+            <h2 className="text-2xl font-bold text-white mb-4">Account QR Code</h2>
+            <div className="bg-white p-4 rounded-lg mb-4">
+              <QRCodeSVG
+                value={showQRCode}
+                size={200}
+                level="H"
+                includeMargin
+              />
+            </div>
+            <button
+              onClick={() => setShowQRCode(null)}
+              className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showScanner && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-slate-800/90 p-6 rounded-xl border border-slate-700 w-full max-w-md">
+            <h2 className="text-2xl font-bold text-white mb-4">Scan Account QR Code</h2>
+            <div id="qr-reader" className="overflow-hidden rounded-lg mb-4" />
+            <button
+              onClick={() => setShowScanner(false)}
+              className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-lg p-3 transition-colors"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       )}
