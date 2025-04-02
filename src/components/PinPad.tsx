@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Account } from '../types';
+import { NotificationContainer } from './ui/Notification';
+import { addNotification, Notification } from '../utils/notifications';
 
 interface Props {
   account: Account;
@@ -26,7 +28,7 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
       onSuccess();
     } else {
       setPin('');
-      alert('Incorrect PIN');
+      addNotification('Invalid PIN', 'error');
     }
   };
 
@@ -50,6 +52,7 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
 
   return (
     <div className="p-8 max-w-md mx-auto">
+      <NotificationContainer />
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-bold text-white">Enter PIN for {account.name}</h2>
         <button onClick={onBack} className="text-slate-400 hover:text-white">

@@ -45,11 +45,15 @@ export default function AccountList({ onSelectAccount }: Props) {
       );
       
       scanner.render((decodedText) => {
+        console.log('Decoded Text:', decodedText);
         const account = accounts.find(acc => acc.id === decodedText);
-        if (account) {
+        if (account !== undefined) {
           setShowScanner(false);
           scanner?.clear();
           onSelectAccount(account);
+        } else {
+          setShowScanner(false);
+          addNotification('Invalid QR Code', 'error');
         }
       }, () => {});
     }
@@ -63,6 +67,7 @@ export default function AccountList({ onSelectAccount }: Props) {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
+     <NotificationContainer />
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold text-blue-400">ATM Dashboard</h1>
         <button
