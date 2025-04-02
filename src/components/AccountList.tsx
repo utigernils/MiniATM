@@ -18,6 +18,11 @@ export default function AccountList({ onSelectAccount }: Props) {
   const [newAccountData, setNewAccountData] = useState({ name: '', pin: '' });
 
   const handleCreateAccount = () => {
+    if (!newAccountData.name.trim() || !newAccountData.pin.trim()) {
+      addNotification('Name and PIN cannot be empty', 'error');
+      return;
+    }
+
     const account: Account = {
       id: crypto.randomUUID(),
       name: newAccountData.name,
