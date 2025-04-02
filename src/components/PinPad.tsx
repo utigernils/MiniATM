@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Account } from '../types';
 
@@ -29,6 +29,24 @@ export default function PinPad({ account, onSuccess, onBack }: Props) {
       alert('Incorrect PIN');
     }
   };
+
+  // Tastatur-Eingabe behandeln
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= '0' && e.key <= '9' && pin.length < 4) {
+        setPin(prev => prev + e.key);
+      } else if (e.key === 'Backspace') {
+        handleDelete();
+      } else if (e.key === 'Enter') {
+        handleSubmit();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [pin, account.pin]); // Abhängigkeiten hinzufügen
 
   return (
     <div className="p-8 max-w-md mx-auto">
