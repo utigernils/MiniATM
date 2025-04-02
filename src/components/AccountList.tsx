@@ -69,7 +69,7 @@ export default function AccountList({ onSelectAccount }: Props) {
     <div className="p-8 max-w-4xl mx-auto">
      <NotificationContainer />
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-blue-400">ATM Dashboard</h1>
+        <h1 className="text-4xl font-bold text-blue-400">MiniAtm</h1>
         <button
           onClick={() => setShowScanner(true)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors"
